@@ -132,47 +132,33 @@ let pageInfo = [
   },
 ]
 
+function displayPageInfo(listIndex) {
+  pageInfoElement.empty()
+  pageInfoElement.append(
+    `
+    <h1>
+    ${pageInfo[listIndex].category}
+    </h1>
+    <p>
+    ${pageInfo[listIndex].description}
+    </p>
+    `
+  )
+}
+
 $('body').on('click', '#dairy-btn', () => {
   displayProducts(dairy)
-  pageInfoElement.empty()
-  pageInfoElement.append(
-    `
-    <h1>
-    ${pageInfo[0].category}
-    </h1>
-    <p>
-    ${pageInfo[0].description}
-    </p>
-    `
-  )
+  displayPageInfo(0)
 })
+
 $('body').on('click', '#fruits-btn', () => {
   displayProducts(fruits)
-  pageInfoElement.empty()
-  pageInfoElement.append(
-    `
-    <h1>
-    ${pageInfo[1].category}
-    </h1>
-    <p>
-    ${pageInfo[1].description}
-    </p>
-    `
-  )
+  displayPageInfo(1)
 })
+
 $('body').on('click', '#meats-btn', () => {
   displayProducts(meats)
-  pageInfoElement.empty()
-  pageInfoElement.append(
-    `
-    <h1>
-    ${pageInfo[2].category}
-    </h1>
-    <p>
-    ${pageInfo[2].description}
-    </p>
-    `
-  )
+  displayPageInfo(2)
 })
 
 function displayProducts(list) {
