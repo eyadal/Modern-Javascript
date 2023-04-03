@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.on {
+  background: #0f0;
+  color: #000;
+  font-weight: 800;
+}
+
+#speaker {
+  margin: 20px auto;
+  width: 1024px;
+  height: 400px;
+  background: #ccc;
+}
+.bluetoothActive {
+  background-color: blue;
+  color: #fff;
+  font-weight: 800;
+}
+
+.player {
+  width: 20px;
+  height: 20px;
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#message {
+  width: 1024px;
+  margin: 20px auto;
+}

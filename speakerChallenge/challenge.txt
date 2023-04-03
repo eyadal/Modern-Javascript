@@ -1,0 +1,6 @@
+UPPGIFT
+skapa en knapp CD
+använd changeTrack funktionen
+default värde i switchen
+när CD knappen trycks 
+currentplaying 'track ett'
