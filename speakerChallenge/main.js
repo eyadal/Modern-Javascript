@@ -8,7 +8,8 @@ const messageElement = document.getElementById('message')
 const prevTrackElement = document.getElementById('prev-track')
 const nextTrackElement = document.getElementById('next-track')
 const CDButton = document.getElementById('cd')
-
+const addDivElement = document.querySelector('.add-div')
+const addButtonElement = document.getElementById('add-btn')
 let songs = [
   'Track one',
   'Track two',
@@ -27,9 +28,12 @@ function powerOn() {
   if (isPowered) {
     isPowered = false
     powerButton.classList.remove('on')
+    addDivElement.classList.add('hide-div')
+    console.log(addDivElement)
   } else {
     isPowered = true
     powerButton.classList.add('on')
+    addDivElement.classList.remove('hide-div')
   }
 }
 
@@ -105,6 +109,30 @@ function changeTrack(event) {
   }
 }
 
+// 1. skapa ett input element med en läggtill knapp CHECK
+// 1.2. spara elementet som en variabel i din javascripts fill (För återanvändning) CHECK
+
+// 1.4. input elementet ska vara av typen text CHECK
+// 1.5. input elementet ska ha en placeholder text: "skriv din låt här" CHECK
+// 1.6. text inputen tillsammans med button ska ligga innanför en div CHECK
+// 1.7. div elementet ska ha en class som heter "add-track" CHECKe
+// 1.8. elementen ska ligga intill varandra CHECK
+// 2.0. Skapa en function som heter "addTrack" som tar emot ett event som parameter CHECK
+
+// 2.1. skapa en variabel som heter "addedTrackName" och tilldela den värdet från input elementet
+// 3.0. Kolla så att isPowered är true
+// 3.1. Kolla så att addedTrackName inte är tom
+
+// 3.2. pusha in addedTrackName i tracks arrayen
+
+function addTrack(event) {
+  const addedTrackName = document.getElementById('track-input').value
+
+  if (!isPowered && addedTrackName !== '') return
+  songs.push(addedTrackName)
+}
+
+addButtonElement.addEventListener('click', addTrack)
 CDButton.addEventListener('click', changeTrack)
 prevTrackElement.addEventListener('click', changeTrack)
 nextTrackElement.addEventListener('click', changeTrack)

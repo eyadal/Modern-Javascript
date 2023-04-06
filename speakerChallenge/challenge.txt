@@ -1,6 +1,13 @@
 UPPGIFT
-skapa en knapp CD
-använd changeTrack funktionen
-default värde i switchen
-när CD knappen trycks 
-currentplaying 'track ett'
+// 1. skapa ett input element med en läggtill knapp
+// 1.2. spara elementet som en variabel i din javascripts fill (För återanvändning)
+// 1.3. Vi ska inte kunna se input elementet om stereon är off
+// 1.4. input elementet ska vara av typen text
+// 1.5. input elementet ska ha en placeholder text: "skriv din låt här"
+// 1.6. text inputen tillsammans med button ska ligga innanför en div
+// 1.7. div elementet ska ha en class som heter "add-track"
+// 1.8. elementen ska ligga intill varandra
+
+// 2. skapa en function som pushar in nya tracks i tracks arrayen
+
+// 3. Lägg till en eventlistener på läggtill knappen som anropar funktionen som pushar in nya tracks i tracks arrayen

@@ -41,3 +41,22 @@ button {
   width: 1024px;
   margin: 20px auto;
 }
+.add-div {
+  display: flex;
+  margin: 10px;
+}
+.hide-div {
+  display: none;
+}
+
+#track-input {
+  margin: 10px 0px 10px;
+  cursor: pointer;
+  height: 40px;
+}
+
+#add-btn {
+  margin: 10px 0px 10px;
+  cursor: pointer;
+  height: 40px;
+}
