@@ -1,6 +1,5 @@
-const listOfVehicles = $('#list-of-vehicles')
-const searchInputElement = $('#search-input')
-// const searchInputElement = document.getElementById('search-input')
+const listOfVehicles = document.getElementById('list-of-vehicles')
+const searchInputElement = document.getElementById('search-input')
 let vehiclesInfo = [
   {
     brand: 'mercedes',
@@ -111,10 +110,10 @@ let vehiclesInfo = [
 ]
 
 function displayCard(list) {
+  listOfVehicles.innerHTML = ''
   list.map(({ brand, color, year, transmission, price, image }) => {
     let brandToUpperCase = brand.toUpperCase()
-    listOfVehicles.append(
-      `
+    listOfVehicles.innerHTML += `
       <div class="car-card">
         <h4>${brandToUpperCase}</h4>
         <img src="${image}"width="300" height="300"/>
@@ -125,26 +124,21 @@ function displayCard(list) {
         <p>Price: ${price} sek</p>
       </div>
     `
-    )
   })
 }
 // 1.0 create addeventlistener to input
 
-function filterCards() {
-  vehiclesInfo.filter(({ brand, color, year, transmission, price, image }) => {
-    //   let vehicleBrand = brand
-    //   let vehicleYear = year
-    //   let vehicleColor = color
-    //   let vehicleTransmission = transmission
-    //   let vehiclePrice = price
-    //   let vehicleImage = image
-    //   console.log(event.target.id)
-  })
+const filterCards = function (event) {
+  console.log(event.target.value)
+  let newFilteredArr = vehiclesInfo.filter(
+    ({ brand, color, year, transmission, price, image }) =>
+      brand.includes(event.target.value)
+  )
+  displayCard(newFilteredArr)
 }
 
 // displayCarBrands(carBrands)
 displayCard(vehiclesInfo)
-filterCards()
 
 // Eventhandlers
-searchInputElement.addEventListener('click', filterCards())
+searchInputElement.addEventListener('keyup', filterCards)
