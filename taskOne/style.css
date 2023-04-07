@@ -1,11 +1,32 @@
-#list-of-cars {
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#list-of-vehicles {
   display: flex;
-  flex-direction: column;
-  width: 510px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .car-card {
+  width: 200px;
   border: 1px solid black;
+  margin: 5px;
   padding: 5px;
-  margin: 8px;
+}
+img {
+  width: auto;
+  height: 100px;
+  object-fit: cover;
+}
+p {
+  font-size: smaller;
+  margin: 0;
+  text-transform: capitalize;
+}
+hr {
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.329);
+  border-radius: 50%;
 }
