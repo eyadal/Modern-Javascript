@@ -10,7 +10,8 @@
   </head>
   <body>
     <div id="speaker">
-      <button id="power-button">on/off</button>
+      <button id="power-button">power</button>
+      <button id="cd">CD</button>
       <button id="bluetooth">bluetooth</button>
       <button id="decrease-vol">decrees vol</button>
       <button id="increase-vol">increase vol</button>
@@ -18,9 +19,13 @@
 
       <button id="prev-track">previous</button>
       <button id="next-track">next</button>
-      <button id="cd">CD</button>
-      <div class="add-div hide-div">
-        <input id="track-input" type="text" placeholder="Search Song" />
+      <div class="add-div">
+        <input
+          id="track-input"
+          type="text"
+          placeholder="Search Song"
+          autocomplete="off"
+        />
         <button id="add-btn">Add Song</button>
       </div>
     </div>

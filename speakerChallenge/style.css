@@ -8,6 +8,7 @@ button {
   padding: 10px;
   margin: 10px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .on {
@@ -22,8 +23,15 @@ button {
   height: 400px;
   background: #ccc;
 }
-.bluetoothActive {
+
+.bluetoothActiveCss {
   background-color: blue;
+  color: #fff;
+  font-weight: 800;
+}
+
+.cdActiveCss {
+  background-color: rgb(191, 132, 21);
   color: #fff;
   font-weight: 800;
 }
@@ -53,6 +61,7 @@ button {
   margin: 10px 0px 10px;
   cursor: pointer;
   height: 40px;
+  padding-left: 5px;
 }
 
 #add-btn {

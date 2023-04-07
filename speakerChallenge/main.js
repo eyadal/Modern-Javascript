@@ -19,36 +19,45 @@ let songs = [
 ]
 // States
 let bluetoothActive = false
+let cdActive = false
 let isPowered = false
 let volumeLevel = 5
 let currentPlaying = 'Track one'
+addDivElement.classList.add('hide-div')
 
 // functions
 function powerOn() {
   if (isPowered) {
+    if (bluetoothActive) {
+      bluetoothOn()
+    }
+    if (cdActive) {
+      cdOn()
+    }
     isPowered = false
     powerButton.classList.remove('on')
-    addDivElement.classList.add('hide-div')
+
     console.log(addDivElement)
   } else {
     isPowered = true
     powerButton.classList.add('on')
-    addDivElement.classList.remove('hide-div')
   }
 }
 
 function bluetoothOn() {
-  if (isPowered === true) {
-    if (bluetoothActive === false) {
-      // starta bluetooth
-      bluetoothButton.classList.add('bluetoothActive')
-      bluetoothActive = true
-      console.log(bluetoothActive)
-    } else {
-      // stäng av bluetooth
-      bluetoothButton.classList.remove('bluetoothActive')
-      bluetoothActive = false
-    }
+  if (!isPowered) return
+  if (cdActive) {
+    cdOn()
+  }
+  if (bluetoothActive === false) {
+    // starta bluetooth
+    bluetoothButton.classList.add('bluetoothActiveCss')
+    bluetoothActive = true
+    console.log(bluetoothActive)
+  } else {
+    // stäng av bluetooth
+    bluetoothButton.classList.remove('bluetoothActiveCss')
+    bluetoothActive = false
   }
 }
 
@@ -108,32 +117,41 @@ function changeTrack(event) {
       break
   }
 }
+function cdOn() {
+  if (!isPowered) return // Check if Power button off then return
+  if (bluetoothActive) {
+    // check if bluetooth btn is on
+    bluetoothOn() // turn the bluetooth btn off
+  }
 
-// 1. skapa ett input element med en läggtill knapp CHECK
-// 1.2. spara elementet som en variabel i din javascripts fill (För återanvändning) CHECK
+  if (cdActive === false) {
+    // check if cd btn is off
+    // starta cd
 
-// 1.4. input elementet ska vara av typen text CHECK
-// 1.5. input elementet ska ha en placeholder text: "skriv din låt här" CHECK
-// 1.6. text inputen tillsammans med button ska ligga innanför en div CHECK
-// 1.7. div elementet ska ha en class som heter "add-track" CHECKe
-// 1.8. elementen ska ligga intill varandra CHECK
-// 2.0. Skapa en function som heter "addTrack" som tar emot ett event som parameter CHECK
-
-// 2.1. skapa en variabel som heter "addedTrackName" och tilldela den värdet från input elementet
-// 3.0. Kolla så att isPowered är true
-// 3.1. Kolla så att addedTrackName inte är tom
-
-// 3.2. pusha in addedTrackName i tracks arrayen
+    CDButton.classList.add('cdActiveCss') // active btn when clicked
+    addDivElement.classList.remove('hide-div') // remove the hide class, display the input and btn elements
+    cdActive = true // update the state to true
+    console.log(cdActive)
+  } else {
+    // stäng av cd
+    CDButton.classList.remove('cdActiveCss') // deactive btn when clicked
+    addDivElement.classList.add('hide-div') // add the hide class to not display input and btn element
+    cdActive = false // update state to false
+  }
+}
 
 function addTrack(event) {
   const addedTrackName = document.getElementById('track-input').value
 
   if (!isPowered && addedTrackName !== '') return
   songs.push(addedTrackName)
+  let clearInput = (document.getElementById('track-input').value = '')
+  clearInput.innerHTML = ''
+  messageElement.innerText = ''
 }
 
 addButtonElement.addEventListener('click', addTrack)
-CDButton.addEventListener('click', changeTrack)
+CDButton.addEventListener('click', cdOn)
 prevTrackElement.addEventListener('click', changeTrack)
 nextTrackElement.addEventListener('click', changeTrack)
 muteVolumeButton.addEventListener('click', changeVolumeLevel)
