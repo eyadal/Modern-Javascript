@@ -1,5 +1,7 @@
 const listOfVehicles = document.getElementById('list-of-vehicles')
 const searchInputElement = document.getElementById('search-input')
+const selectColorElement = document.getElementById('select-color')
+const selectYearElement = document.getElementById('select-year')
 let vehiclesInfo = [
   {
     brand: 'mercedes',
@@ -109,36 +111,87 @@ let vehiclesInfo = [
   },
 ]
 
+function drawExistingColors() {
+  const allExistingColors = vehiclesInfo.map(({ color }) => {
+    return color
+  })
+  let uniqueArray = [...new Set(allExistingColors)] // tar bort alla dubbletter
+  uniqueArray.forEach((color) => {
+    selectColorElement.innerHTML += `<option value="${color}">${color}</option>`
+  })
+}
+drawExistingColors()
+
+function drawExistingYears() {
+  let mapVehiclesYear = vehiclesInfo.map(({ year }) => year)
+  const uniqueArray = [...new Set(mapVehiclesYear)]
+  uniqueArray.forEach(
+    (year) =>
+      (selectYearElement.innerHTML += `<option value="${year}">${year}</option>`)
+  )
+}
+drawExistingYears()
+
 function displayCard(list) {
   listOfVehicles.innerHTML = ''
   list.map(({ brand, color, year, transmission, price, image }) => {
     let brandToUpperCase = brand.toUpperCase()
     listOfVehicles.innerHTML += `
-      <div class="car-card">
-        <h4>${brandToUpperCase}</h4>
-        <img src="${image}"width="300" height="300"/>
-        <hr />
-        <p>Year: ${year}</p>
-        <p>${transmission}</p>
-        <p>${color}</p>
+    <div class="car-card">
+    <h4>${brandToUpperCase}</h4>
+    <img src="${image}"width="300" height="300"/>
+    <hr />
+    <p>Year: ${year}</p>
+    <p>${transmission}</p>
+    <p>${color}</p>
         <p>Price: ${price} sek</p>
-      </div>
-    `
+        </div>
+        `
   })
 }
-// 1.0 create addeventlistener to input
-
-const filterCards = function (event) {
-  console.log(event.target.value)
-  let newFilteredArr = vehiclesInfo.filter(
-    ({ brand, color, year, transmission, price, image }) =>
-      brand.includes(event.target.value)
-  )
-  displayCard(newFilteredArr)
-}
-
-// displayCarBrands(carBrands)
 displayCard(vehiclesInfo)
 
+// Skapa en funktion som filtrerar fordonen
+function filterVehiclesArray() {
+  let searchString = this.value
+  // Skapa en ny array med alla fordon som matchar sökningen
+  const filteredVehiclesArray = vehiclesInfo.filter(({ brand }) =>
+    brand.includes(searchString)
+  )
+  displayCard(filteredVehiclesArray)
+  // Skicka den nya filtrerade arrayen till displayCard
+}
+
 // Eventhandlers
-searchInputElement.addEventListener('keyup', filterCards)
+
+searchInputElement.addEventListener('keyup', filterVehiclesArray)
+
+function filterVehiclesByColor() {
+  let selectedColor = this.value
+
+  const filteredVehiclesByColor = vehiclesInfo.filter(
+    ({ color }) => color === selectedColor
+  )
+  displayCard(filteredVehiclesByColor)
+  if (this.value === 'all') displayCard(vehiclesInfo)
+}
+selectColorElement.addEventListener('change', filterVehiclesByColor)
+
+// Skapa en funktion som filtrerar fordonen via select år elementet på sidan
+function filterVehiclesByYear() {
+  let selectedYear = this.value
+  const filteredSelectedYear = vehiclesInfo.filter(
+    ({ year }) => Number(selectedYear) === year
+  )
+  displayCard(filteredSelectedYear)
+  if (selectedYear === 'all') {
+    displayCard(vehiclesInfo)
+  }
+}
+selectYearElement.addEventListener('change', filterVehiclesByYear)
+// console.log ett år när du byter år i select år elementet i browsern
+// skapa en variable som innehåller fordonenets år
+// byt ut console.loggen till en arrayvariabel som innehåller en function som filtrerar fordonen via åren som är vald
+// kör displayCard funktionen med den nya filtrerade arreyen som parameter
+
+// kör ring funktionen när du bytt år från listan med hjälp av eventlistener
