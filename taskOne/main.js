@@ -110,12 +110,12 @@ let vehiclesInfo = [
       'https://static-assets.tesla.com/configurator/compositor?&bkba_opt=2&view=STUD_3QTR&size=1400&model=ms&options=$BP02,$ADPX2,$AU01,$APF1,$APH3,$APPB,$X028,$BTX5,$BS00,$BCMB,$CH04,$CF00,$CW02,$COSE,$X039,$IDCF,$X027,$DRLH,$DU00,$AF02,$FMP6,$FG02,$DCF0,$FR04,$X007,$X011,$INLFC,$PI01,$IX00,$X001,$LP01,$MI03,$X037,$MDLS,$DV4W,$X025,$X003,$PMNG,$PS01,$PK00,$X031,$PX00,$PF00,$X043,$TM00,$BR04,$REEU,$RFP2,$X014,$ME02,$QTFC,$SR07,$SP01,$X021,$SC04,$SU01,$TR00,$TIM3,$DSHG,$MT75A,$UTZW,$WTAS,$YFCC,$CPF0&crop=1400,850,300,130&',
   },
 ]
-
 function drawExistingColors() {
-  const allExistingColors = vehiclesInfo.map(({ color }) => {
-    return color
-  })
-  let uniqueArray = [...new Set(allExistingColors)] // tar bort alla dubbletter
+  // skapar en ny array med färger från varje objekt i vehiclesInfo
+  const allExistingColors = vehiclesInfo.map(({ color }) => color)
+  // tar bort alla dubbletter från allExistingColors
+  let uniqueArray = [...new Set(allExistingColors)]
+  // för varje unik färg i uniqueArray läggs en ny <option>-tagg till i HTML-elementet med id:t selectColorElement
   uniqueArray.forEach((color) => {
     selectColorElement.innerHTML += `<option value="${color}">${color}</option>`
   })
@@ -124,7 +124,9 @@ drawExistingColors()
 
 function drawExistingYears() {
   let mapVehiclesYear = vehiclesInfo.map(({ year }) => year)
+  // skapar en ny array med alla årtal från varje objekt i vehiclesInfo
   const uniqueArray = [...new Set(mapVehiclesYear)]
+  // tar bort alla dubbletter från mapVehiclesYear
   uniqueArray.forEach(
     (year) =>
       (selectYearElement.innerHTML += `<option value="${year}">${year}</option>`)
@@ -189,9 +191,3 @@ function filterVehiclesByYear() {
   }
 }
 selectYearElement.addEventListener('change', filterVehiclesByYear)
-// console.log ett år när du byter år i select år elementet i browsern
-// skapa en variable som innehåller fordonenets år
-// byt ut console.loggen till en arrayvariabel som innehåller en function som filtrerar fordonen via åren som är vald
-// kör displayCard funktionen med den nya filtrerade arreyen som parameter
-
-// kör ring funktionen när du bytt år från listan med hjälp av eventlistener
