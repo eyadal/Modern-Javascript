@@ -1,5 +1,7 @@
 const listOfVehicles = document.getElementById('list-of-vehicles')
 const searchInputElement = document.getElementById('search-input')
+const selectBrandElement = document.getElementById('select-brand')
+
 const selectColorElement = document.getElementById('select-color')
 const selectYearElement = document.getElementById('select-year')
 let vehiclesInfo = [
@@ -110,6 +112,28 @@ let vehiclesInfo = [
       'https://static-assets.tesla.com/configurator/compositor?&bkba_opt=2&view=STUD_3QTR&size=1400&model=ms&options=$BP02,$ADPX2,$AU01,$APF1,$APH3,$APPB,$X028,$BTX5,$BS00,$BCMB,$CH04,$CF00,$CW02,$COSE,$X039,$IDCF,$X027,$DRLH,$DU00,$AF02,$FMP6,$FG02,$DCF0,$FR04,$X007,$X011,$INLFC,$PI01,$IX00,$X001,$LP01,$MI03,$X037,$MDLS,$DV4W,$X025,$X003,$PMNG,$PS01,$PK00,$X031,$PX00,$PF00,$X043,$TM00,$BR04,$REEU,$RFP2,$X014,$ME02,$QTFC,$SR07,$SP01,$X021,$SC04,$SU01,$TR00,$TIM3,$DSHG,$MT75A,$UTZW,$WTAS,$YFCC,$CPF0&crop=1400,850,300,130&',
   },
 ]
+
+// 1.0 deklarera en variabel som håller i html select elementet för (property)
+// 1.1 skapa en funktion för att visa (property)
+// 1.2 skriv en console.log('test') för att testa att det funkar.
+
+// 1.3 skapa en event lyssnare med 'click' och koppla funktionen till den
+// 2.0 skapa en ny array med (property) från varje objekt i vehiclesInfo och deklarera till en variabel
+// 2.1 deklarera en variabel som tar bort alla dubbletter från föregående variabel
+// 2.2  skapa foreach loop som för varje unik (property) i uniqueArray
+//läggs en ny <option>-tagg till i HTML-elementet med id:t select(Property)Element
+// 2.3 utanför kodblocket ring funktionen
+
+function drawExistingBrands() {
+  let mapVehiclesBrand = vehiclesInfo.map(({ brand }) => brand)
+  const uniqueArray = [...new Set(mapVehiclesBrand)]
+  uniqueArray.forEach((brand) => {
+    selectBrandElement.innerHTML += `<option value="${brand}">${brand}</option>`
+  })
+}
+selectBrandElement.addEventListener('keyup', drawExistingBrands)
+drawExistingBrands()
+
 function drawExistingColors() {
   // skapar en ny array med färger från varje objekt i vehiclesInfo
   const allExistingColors = vehiclesInfo.map(({ color }) => color)
