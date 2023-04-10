@@ -68,7 +68,7 @@ let vehiclesInfo = [
       'https://vexstockimages.fastly.carvana.io/stockimages/2022_VOLVO_S60_B5%20MOMENTUM%20SEDAN%204D_WHITE_stock_desktop_1920x1080.png?v=1676381161.235',
   },
   {
-    brand: 'Tesla',
+    brand: 'tesla',
     color: 'blue',
     year: 2023,
     transmission: 'automatic',
@@ -112,6 +112,8 @@ let vehiclesInfo = [
       'https://static-assets.tesla.com/configurator/compositor?&bkba_opt=2&view=STUD_3QTR&size=1400&model=ms&options=$BP02,$ADPX2,$AU01,$APF1,$APH3,$APPB,$X028,$BTX5,$BS00,$BCMB,$CH04,$CF00,$CW02,$COSE,$X039,$IDCF,$X027,$DRLH,$DU00,$AF02,$FMP6,$FG02,$DCF0,$FR04,$X007,$X011,$INLFC,$PI01,$IX00,$X001,$LP01,$MI03,$X037,$MDLS,$DV4W,$X025,$X003,$PMNG,$PS01,$PK00,$X031,$PX00,$PF00,$X043,$TM00,$BR04,$REEU,$RFP2,$X014,$ME02,$QTFC,$SR07,$SP01,$X021,$SC04,$SU01,$TR00,$TIM3,$DSHG,$MT75A,$UTZW,$WTAS,$YFCC,$CPF0&crop=1400,850,300,130&',
   },
 ]
+// STEG ETT
+// ==========================================================================================================================
 
 // 1.0 deklarera en variabel som håller i html select elementet för (property)
 // 1.1 skapa en funktion för att visa (property)
@@ -124,6 +126,8 @@ let vehiclesInfo = [
 //läggs en ny <option>-tagg till i HTML-elementet med id:t select(Property)Element
 // 2.3 utanför kodblocket ring funktionen
 
+// ==========================================================================================================================
+
 function drawExistingBrands() {
   let mapVehiclesBrand = vehiclesInfo.map(({ brand }) => brand)
   const uniqueArray = [...new Set(mapVehiclesBrand)]
@@ -131,7 +135,6 @@ function drawExistingBrands() {
     selectBrandElement.innerHTML += `<option value="${brand}">${brand}</option>`
   })
 }
-selectBrandElement.addEventListener('keyup', drawExistingBrands)
 drawExistingBrands()
 
 function drawExistingColors() {
@@ -187,10 +190,30 @@ function filterVehiclesArray() {
   displayCard(filteredVehiclesArray)
   // Skicka den nya filtrerade arrayen till displayCard
 }
-
 // Eventhandlers
-
 searchInputElement.addEventListener('keyup', filterVehiclesArray)
+
+// STEG TVÅ
+// ==========================================================================================================================
+
+// 1.0 skapa en funktion som filtrerar property
+// 1.1 skapa en filter method på befintlig array med alla fordon, deklarera den till en variabel och använd includes() method
+// i filter methoden och skicka in variabeln som är deklarerad till filter() methoden
+// 1.2 skicka den nya filtrerade arrayen till displayCard()
+
+// ==========================================================================================================================
+
+function filterVehicleByBrand() {
+  let selectBrand = this.value
+  const filteredSelectedBrand = vehiclesInfo.filter(
+    ({ brand }) => brand === selectBrand
+  )
+  displayCard(filteredSelectedBrand)
+  if (selectBrand === 'all') {
+    displayCard(vehiclesInfo)
+  }
+}
+selectBrandElement.addEventListener('change', filterVehicleByBrand)
 
 function filterVehiclesByColor() {
   let selectedColor = this.value
