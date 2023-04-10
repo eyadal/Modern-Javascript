@@ -4,6 +4,7 @@ const selectBrandElement = document.getElementById('select-brand')
 
 const selectColorElement = document.getElementById('select-color')
 const selectYearElement = document.getElementById('select-year')
+const selectTransmissionElement = document.getElementById('select-transmission')
 let vehiclesInfo = [
   {
     brand: 'mercedes',
@@ -112,21 +113,6 @@ let vehiclesInfo = [
       'https://static-assets.tesla.com/configurator/compositor?&bkba_opt=2&view=STUD_3QTR&size=1400&model=ms&options=$BP02,$ADPX2,$AU01,$APF1,$APH3,$APPB,$X028,$BTX5,$BS00,$BCMB,$CH04,$CF00,$CW02,$COSE,$X039,$IDCF,$X027,$DRLH,$DU00,$AF02,$FMP6,$FG02,$DCF0,$FR04,$X007,$X011,$INLFC,$PI01,$IX00,$X001,$LP01,$MI03,$X037,$MDLS,$DV4W,$X025,$X003,$PMNG,$PS01,$PK00,$X031,$PX00,$PF00,$X043,$TM00,$BR04,$REEU,$RFP2,$X014,$ME02,$QTFC,$SR07,$SP01,$X021,$SC04,$SU01,$TR00,$TIM3,$DSHG,$MT75A,$UTZW,$WTAS,$YFCC,$CPF0&crop=1400,850,300,130&',
   },
 ]
-// STEG ETT
-// ==========================================================================================================================
-
-// 1.0 deklarera en variabel som håller i html select elementet för (property)
-// 1.1 skapa en funktion för att visa (property)
-// 1.2 skriv en console.log('test') för att testa att det funkar.
-
-// 1.3 skapa en event lyssnare med 'click' och koppla funktionen till den
-// 2.0 skapa en ny array med (property) från varje objekt i vehiclesInfo och deklarera till en variabel
-// 2.1 deklarera en variabel som tar bort alla dubbletter från föregående variabel
-// 2.2  skapa foreach loop som för varje unik (property) i uniqueArray
-//läggs en ny <option>-tagg till i HTML-elementet med id:t select(Property)Element
-// 2.3 utanför kodblocket ring funktionen
-
-// ==========================================================================================================================
 
 function drawExistingBrands() {
   let mapVehiclesBrand = vehiclesInfo.map(({ brand }) => brand)
@@ -160,6 +146,34 @@ function drawExistingYears() {
   )
 }
 drawExistingYears()
+
+// STEG ETT
+// ==========================================================================================================================
+
+// 1.0 deklarera en variabel som håller i html select elementet för (property)
+// 1.1 skapa en funktion för att visa (property)
+// 1.2 skriv en console.log('test') för att testa att det funkar.
+
+// 1.3 skapa en event lyssnare med 'click' och koppla funktionen till den
+// 2.0 skapa en ny array med (property) från varje objekt map() vehiclesInfo och deklarera till en variabel
+// 2.1 deklarera en variabel som tar bort alla dubbletter från föregående variabel
+// 2.2  skapa foreach loop som för varje unik (property) i uniqueArray
+//läggs en ny <option>-tagg till i HTML-elementet med id:t select(Property)Element
+// 2.3 utanför kodblocket ring funktionen
+
+// ==========================================================================================================================
+function drawExistingTransmission() {
+  let mapVehiclesTransmission = vehiclesInfo.map(
+    ({ transmission }) => transmission
+  )
+  const uniqueArray = [...new Set(mapVehiclesTransmission)]
+  uniqueArray.forEach(
+    (transmission) =>
+      (selectTransmissionElement.innerHTML += `<option value="${transmission}">${transmission}</option>`)
+  )
+}
+drawExistingTransmission()
+selectTransmissionElement.addEventListener('keyup', drawExistingTransmission)
 
 function displayCard(list) {
   listOfVehicles.innerHTML = ''
@@ -203,12 +217,21 @@ searchInputElement.addEventListener('keyup', filterVehiclesArray)
 
 // ==========================================================================================================================
 
+// Detta är en funktion som filtrerar fordon baserat på varumärket i gränssnittet
 function filterVehicleByBrand() {
+  // Hämtar det aktuella värdet från formuläret och sparar det i variabeln `selectBrand`
   let selectBrand = this.value
+
+  // Filtrerar objekten i arrayen `vehiclesInfo` baserat på värdet av `selectBrand`
+  // Skapar en ny array som innehåller endast objekt med matchande varumärke
   const filteredSelectedBrand = vehiclesInfo.filter(
     ({ brand }) => brand === selectBrand
   )
+
+  // Visar korten för de matchande fordonen i gränssnittet genom att anropa funktionen `displayCard`
   displayCard(filteredSelectedBrand)
+
+  // Om `selectBrand` är "all", visas alla fordon i gränssnittet genom att anropa `displayCard` med hela `vehiclesInfo`-arrayen
   if (selectBrand === 'all') {
     displayCard(vehiclesInfo)
   }
