@@ -162,18 +162,24 @@ drawExistingYears()
 // 2.3 utanför kodblocket ring funktionen
 
 // ==========================================================================================================================
+
+// Detta är en funktion som ritar ut befintliga transmissioner i gränssnittet
 function drawExistingTransmission() {
+  // Skapar en ny array med alla befintliga transmissioner som finns i `vehiclesInfo`
   let mapVehiclesTransmission = vehiclesInfo.map(
     ({ transmission }) => transmission
   )
+  // Skapar en ny array med unika värden från `mapVehiclesTransmission`
   const uniqueArray = [...new Set(mapVehiclesTransmission)]
+  // Loopar igenom arrayen `uniqueArray` och lägger till en HTML `<option>` tagg till gränssnittet för varje unikt transmissionsvärde
   uniqueArray.forEach(
     (transmission) =>
       (selectTransmissionElement.innerHTML += `<option value="${transmission}">${transmission}</option>`)
   )
 }
+
+// Anropar funktionen `drawExistingTransmission` för att rita ut befintliga transmissioner i gränssnittet
 drawExistingTransmission()
-selectTransmissionElement.addEventListener('keyup', drawExistingTransmission)
 
 function displayCard(list) {
   listOfVehicles.innerHTML = ''
@@ -206,16 +212,6 @@ function filterVehiclesArray() {
 }
 // Eventhandlers
 searchInputElement.addEventListener('keyup', filterVehiclesArray)
-
-// STEG TVÅ
-// ==========================================================================================================================
-
-// 1.0 skapa en funktion som filtrerar property
-// 1.1 skapa en filter method på befintlig array med alla fordon, deklarera den till en variabel och använd includes() method
-// i filter methoden och skicka in variabeln som är deklarerad till filter() methoden
-// 1.2 skicka den nya filtrerade arrayen till displayCard()
-
-// ==========================================================================================================================
 
 // Detta är en funktion som filtrerar fordon baserat på varumärket i gränssnittet
 function filterVehicleByBrand() {
@@ -261,3 +257,31 @@ function filterVehiclesByYear() {
   }
 }
 selectYearElement.addEventListener('change', filterVehiclesByYear)
+
+// STEG TVÅ
+// ==========================================================================================================================
+
+// 1.0 skapa en funktion som filtrerar property
+// 1.1 deklarera en variable som håller i this.value
+// 1.2 skapa en filter method på befintlig array med alla fordon, deklarera den till en variabel och använd includes() method
+// i filter methoden och skicka in variabeln som är deklarerad till filter() methoden
+// 1.3 skicka den nya filtrerade arrayen till displayCard()
+
+// ==========================================================================================================================
+
+// Detta är en funktion som filtrerar fordon baserat på vald transmission i gränssnittet
+function filterVehiclesByTransmission() {
+  // Hämtar det aktuella värdet från formuläret och sparar det i variabeln `selectTransmission`
+  let selectTransmission = this.value
+  // Filtrerar objekten i arrayen `vehiclesInfo` baserat på värdet av `selectTransmission`
+  const filteredSelectedTransmission = vehiclesInfo.filter(
+    ({ transmission }) => selectTransmission === transmission
+  )
+  // Visar korten för de matchande fordonen i gränssnittet genom att anropa funktionen displayCard
+  displayCard(filteredSelectedTransmission)
+}
+// Lägger till en händelselyssnare på elementet `selectTransmissionElement` för att lyssna på ändringar och när en användare väljer en transmission
+selectTransmissionElement.addEventListener(
+  'change',
+  filterVehiclesByTransmission
+)
