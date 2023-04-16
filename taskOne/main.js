@@ -5,6 +5,10 @@ const selectBrandElement = document.getElementById('select-brand')
 const selectColorElement = document.getElementById('select-color')
 const selectYearElement = document.getElementById('select-year')
 const selectTransmissionElement = document.getElementById('select-transmission')
+// const selectPriceElement = document.getElementById('select-price')
+const selectMinPriceElement = document.getElementById('select-min-price')
+const selectMaxPriceElement = document.getElementById('select-max-price')
+
 let vehiclesInfo = [
   {
     brand: 'mercedes',
@@ -20,7 +24,7 @@ let vehiclesInfo = [
     color: 'white',
     year: 2022,
     transmission: 'automatic',
-    price: '347 000',
+    price: '347000',
     image:
       'https://images.dealer.com/ddc/vehicles/2023/BMW/530e/Sedan/trim_xDrive_482c68/color/Alpine%20White-300-233%2C238%2C232-640-en_US.jpg',
   },
@@ -29,7 +33,7 @@ let vehiclesInfo = [
     color: 'silver',
     year: 2020,
     transmission: 'manual',
-    price: '289 000',
+    price: '289000',
     image:
       'https://images.dealer.com/ddc/vehicles/2023/Volvo/S60/Sedan/trim_B5_Core_Dark_Theme_666a77/color/Silver%20Dawn%20Metallic-735-148%2C149%2C156-640-en_US.jpg?impolicy=downsize_bkpt&imdensity=1&w=520',
   },
@@ -38,7 +42,7 @@ let vehiclesInfo = [
     color: 'red',
     year: 2021,
     transmission: 'automatic',
-    price: '529 000',
+    price: '529000',
     image: 'https://www.pngmart.com/files/22/Tesla-Model-3-PNG-Image.png',
   },
   {
@@ -46,7 +50,7 @@ let vehiclesInfo = [
     color: 'silver',
     year: 2022,
     transmission: 'automatic',
-    price: '479 000',
+    price: '479000',
     image:
       'https://bild.landrinsbil.se/cb:HqbC~437e0/w:512/h:341/q:80/https://landrinsbil.se/app/uploads/2021/07/Mercedes-AMG-A-klass-Halvkombi.jpg',
   },
@@ -55,7 +59,7 @@ let vehiclesInfo = [
     color: 'black',
     year: 2022,
     transmission: 'automatic',
-    price: '347 000',
+    price: '347000',
     image:
       'https://www.bmw.com.pe/content/dam/bmw/common/all-models/5-series/sedan/2020/models-and-equipment/bmw-5-series-sedan-models-and-equipment-lines-01-01.jpg.asset.1587045994071.jpg',
   },
@@ -64,7 +68,7 @@ let vehiclesInfo = [
     color: 'white',
     year: 2021,
     transmission: 'manual',
-    price: '280 000',
+    price: '280000',
     image:
       'https://vexstockimages.fastly.carvana.io/stockimages/2022_VOLVO_S60_B5%20MOMENTUM%20SEDAN%204D_WHITE_stock_desktop_1920x1080.png?v=1676381161.235',
   },
@@ -73,7 +77,7 @@ let vehiclesInfo = [
     color: 'blue',
     year: 2023,
     transmission: 'automatic',
-    price: '639 000',
+    price: '639000',
     image:
       'https://mysterio.yahoo.com/mysterio/api/560D9CFA9F40C33DFAB0B40F9E9BC872D97704B1E154B1BE2E093622A4C723B0/autoblog/resizefill_w476_h266;quality_80;format_webp;cc_31536000;/https://s.aolcdn.com/commerce/autodata/images/USD10TSC024D021001.jpg',
   },
@@ -82,7 +86,7 @@ let vehiclesInfo = [
     color: 'black',
     year: 2021,
     transmission: 'automatic',
-    price: '379 000',
+    price: '379000',
     image:
       'https://bild.landrinsbil.se/cb:HqbC~437e0/w:auto/h:auto/q:80/https://landrinsbil.se/app/uploads/2021/06/Mercedes-Benz-C-klass-Sedan.jpg',
   },
@@ -91,7 +95,7 @@ let vehiclesInfo = [
     color: 'blue',
     year: 2022,
     transmission: 'manual',
-    price: '447 000',
+    price: '447000',
     image:
       'https://www.bmw.com.pe/content/dam/bmw/common/all-models/5-series/sedan/2020/models-and-equipment/bmw-5-series-sedan-models-and-equipment-lines-03-01.jpg.asset.1631533571837.jpg',
   },
@@ -100,7 +104,7 @@ let vehiclesInfo = [
     color: 'red',
     year: 2019,
     transmission: 'automatic',
-    price: '279 000',
+    price: '279000',
     image: 'https://imgd.aeplcdn.com/370x208/n/rzafkva_1604911.jpg?q=75',
   },
   {
@@ -108,7 +112,7 @@ let vehiclesInfo = [
     color: 'grey',
     year: 2022,
     transmission: 'automatic',
-    price: '479 000',
+    price: '479000',
     image:
       'https://static-assets.tesla.com/configurator/compositor?&bkba_opt=2&view=STUD_3QTR&size=1400&model=ms&options=$BP02,$ADPX2,$AU01,$APF1,$APH3,$APPB,$X028,$BTX5,$BS00,$BCMB,$CH04,$CF00,$CW02,$COSE,$X039,$IDCF,$X027,$DRLH,$DU00,$AF02,$FMP6,$FG02,$DCF0,$FR04,$X007,$X011,$INLFC,$PI01,$IX00,$X001,$LP01,$MI03,$X037,$MDLS,$DV4W,$X025,$X003,$PMNG,$PS01,$PK00,$X031,$PX00,$PF00,$X043,$TM00,$BR04,$REEU,$RFP2,$X014,$ME02,$QTFC,$SR07,$SP01,$X021,$SC04,$SU01,$TR00,$TIM3,$DSHG,$MT75A,$UTZW,$WTAS,$YFCC,$CPF0&crop=1400,850,300,130&',
   },
@@ -146,6 +150,36 @@ function drawExistingYears() {
   )
 }
 drawExistingYears()
+
+function drawPriceOptionsToSelectElement() {
+  for (let i = 1; i <= 1000000; i++) {
+    if (i < 100000 && i % 5000 === 0) {
+      selectMinPriceElement.innerHTML += `<option value="${i}">${i}</option>`
+      selectMaxPriceElement.innerHTML += `<option value="${i}">${i}</option>`
+    } else if (i % 50000 === 0) {
+      selectMinPriceElement.innerHTML += `<option value="${i}">${i}</option>`
+      selectMaxPriceElement.innerHTML += `<option value="${i}">${i}</option>`
+    }
+  }
+}
+
+drawPriceOptionsToSelectElement()
+
+/* function drawExistingPrice() {
+  for (let price = 0; price < 700000; ) {
+    if (price < 300000) {
+      price += 5000
+      selectMinPriceElement.innerHTML += `<option value="${price}">${price}</option>`
+      selectMaxPriceElement.innerHTML += `<option value="${price}">${price}</option>`
+    } else {
+      price += 50000
+      selectMinPriceElement.innerHTML += `<option value="${price}">${price}</option>`
+      selectMaxPriceElement.innerHTML += `<option value="${price}">${price}</option>`
+    }
+  }
+} 
+drawExistingPrice()
+*/
 
 // STEG ETT
 // ==========================================================================================================================
@@ -285,3 +319,35 @@ selectTransmissionElement.addEventListener(
   'change',
   filterVehiclesByTransmission
 )
+// Om värdet du väljer i min option matchar priset i ett objekt, displayCard objektet
+
+function filterByPriceRange() {
+  const hasMinPrice = selectMinPriceElement.value != 'min'
+  const hasMaxPrice = selectMaxPriceElement.value != 'max'
+
+  const maxPriceValue = parseInt(selectMaxPriceElement.value) // värdet av max
+  const minPriceValue = parseInt(selectMinPriceElement.value) // värdet av min
+
+  const filteredSelectedPrice = vehiclesInfo.filter(({ price }) => {
+    const parsedPrice = parseInt(price)
+
+    // Om båda har ett värde
+    if (hasMaxPrice && hasMinPrice) {
+      // returna bara om priset är större än min och priset är mindre än max
+      return minPriceValue <= parsedPrice && maxPriceValue >= parsedPrice
+    } else if (hasMinPrice) {
+      // Om priset är större än min
+      return minPriceValue <= parsedPrice
+    } else {
+      // Om priset är mindre än max
+      return maxPriceValue >= parsedPrice
+    }
+  })
+
+  displayCard(filteredSelectedPrice)
+}
+
+displayCard(vehiclesInfo)
+
+selectMaxPriceElement.addEventListener('change', filterByPriceRange)
+selectMinPriceElement.addEventListener('change', filterByPriceRange)
