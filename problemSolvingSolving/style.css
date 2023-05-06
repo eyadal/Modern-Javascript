@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 30px;
+  justify-content: flex-start;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgba(254, 250, 1, 0.179);
+}
+.shape {
+  display: flex;
+
+  flex-wrap: wrap;
+  padding-bottom: 50px;
+  justify-content: center;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: red;
+  margin: 10px;
+}
+
+.circle span {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.rectangle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background-color: rgb(43, 167, 43);
+  margin: 10px;
+}
+.rectangle span {
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.triangle {
+  width: 200px;
+  height: 0;
+  border-style: solid;
+  border-width: 0 80px 80px 80px;
+  border-color: transparent transparent rgb(44, 213, 247) transparent;
+  margin: 10px;
+}
+
+.triangle span {
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
